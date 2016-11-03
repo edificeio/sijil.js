@@ -1,0 +1,32 @@
+{
+    "name": "sijil.js",
+    "description": "A simple and elegant i18n library",
+    "moduleType": "es6",
+    "main": "dist/index.js",
+    "authors": [
+        "Julien Elbaz <julien.elbaz@opendigitaleducation.com>"
+    ],
+    "license": "GPL-3.0",
+    "keywords": [
+        "angular2",
+        "i18n",
+        "sijil",
+        "internationalization",
+        "translate",
+        "traduction"
+    ],
+    "homepage": "http://entcore.org",
+    "private": true,
+    "ignore": [
+        "node_modules/",
+        "bower_components/",
+        "src/",
+        "config/",
+        ".vscode/",
+        "demo/",
+        ".DS_Store",
+        ".gitignore",
+        "tsconfig.json",
+        "typings.json"
+    ]
+}

@@ -1,0 +1,11 @@
+node_modules/
+bower_components/
+.vscode/
+.DS_Store
+.gradle
+.idea
+.classpath
+.project
+.settings
+.yardoc
+.yardopts

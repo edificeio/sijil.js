@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+    <head>
+        <base href="/">
+        <title>Test internationalization</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/demo/styles.css">
+
+        <script src="/node_modules/core-js/client/shim.min.js"></script>
+        <script src="/node_modules/zone.js/dist/zone.js"></script>
+        <script src="/node_modules/reflect-metadata/Reflect.js"></script>
+        <script src="/node_modules/systemjs/dist/system.src.js"></script>
+        <script src="/demo/systemjs.config.js"></script>
+        <script src="/dist/bundles/sijil.js"></script>
+        <script>
+            System.import('demo')
+            //.then(() => { return System.import('/demo/test.outside.angular.ts') })
+            .catch(function(err) {
+                console.error(err);
+            })
+
+            Sijil.loadBundle('/demo/'+Sijil.defaultLanguage+'.json').then(function(){
+                Sijil.addToBundle({ 'test': '[OK] Sijil is now loaded outside the angular scope.' })
+                console.log(Sijil.translate('test'))
+                console.log(Sijil.translate('hello'))
+            });
+        </script>
+        <style>
+            @import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro';
+
+            body {
+                font-family: 'Source Sans Pro';
+            }
+        </style>
+    </head>
+
+    <body>
+        <test-i18n>Loading...</test-i18n>
+    </body>
+
+</html>

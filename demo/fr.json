@@ -1,0 +1,23 @@
+{
+    "sijil.demo" : "[SI]mple [J]son [I]nternationa[L]ization - Page de démonstration",
+    "hello": "Bonjour !",
+    "choose.language": "Choisir une langue",
+    "loaded.languages": "Langues chargées",
+    "fr": "Français",
+    "en": "Anglais",
+    "plain.text": "Texte brut",
+    "attributes": "Attributs html",
+    "specific.language": "Possibilité de fixer une langue en particulier",
+    "conditional.parameters": "Paramètres conditionnels",
+    "conditional.sample": "Voici {{ name ? name : Personne }} et {{ bunnyCount > 1 ? ses $bunnyCount lapins : son lapin }}",
+    "positional.parameters": "Paramètres positionnels",
+    "positional.sample": "{{0}} coiffe un autre client. {{1}} s'assied en attendant son tour, et {{2}} s'empresse de les rejoindre.",
+    "male": "Masculin",
+    "unsupported.language": "Langue non supportée",
+    "use.default.lang": "Utiliser la langue par défaut (en cas de non support de la langue sélectionnée)",
+    "subject.name": "Nom du sujet",
+    "bunny.number": "Nombre de lapins",
+    "key": "Clef",
+    "value": "Valeur",
+    "shuffle": "Mélanger"
+}
