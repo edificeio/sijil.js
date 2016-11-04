@@ -25,6 +25,7 @@
         ".vscode/",
         "docs/",
         "test/",
+        ".nojekyll",
         ".babelrc",
         ".DS_Store",
         ".gitignore",

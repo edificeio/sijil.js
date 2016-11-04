@@ -33,7 +33,7 @@ The library is also completely customizable, from the Loader to the Parser.
 
 ```json
 "dependencies": {
-    "sigil.js": "git://github.com/web-education/sijil.js#master"
+    "sijil": "git://github.com/web-education/sijil.js#master"
 }
 ```
 >.bowerrc
@@ -56,7 +56,21 @@ Distribution files will be located inside the `dist` folder.
 
 ### *With angular2*
 
-Use the es6 files (`dist/index.js`) ans d.ts definitions, or the umd.bundle located inside the `dist/bundles/sijil.module.umd.js`. 
+Use the es6 files ( `dist/index.js` as the entry point ) and d.ts definitions, or the umd.bundle located inside the `dist/bundles/sijil.module.umd.js`. 
+
+For example, with SystemJs loader, inside the `systemjs.config.js` file :
+
+```javascript
+ System.config({
+     // ... //
+     map: {
+         // ... //
+         'sijil/dist': 'npm:sijil/dist/bundles/sijil.module.umd.js'
+         // ... //
+     }
+     // ... //
+ })
+````
 
 #### Import the module
 
