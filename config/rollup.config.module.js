@@ -20,6 +20,6 @@ export default {
             experimentalDecorators: true,
             sourceMap: true
         }),
-        //uglify()
+        uglify()
     ]
 }
