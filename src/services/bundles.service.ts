@@ -110,7 +110,7 @@ export class BundlesService {
         if(rawTranslation !== key && parameters) {
             return this.parser.compile(rawTranslation, parameters, (e) => { console.error(e); return key })
         } else {
-            return rawTranslation
+            return rawTranslation + ":("
         }
 
     }
