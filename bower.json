@@ -30,6 +30,7 @@
         ".DS_Store",
         ".gitignore",
         "tsconfig.json",
-        "typings.json"
+        "typings.json",
+        ".travis.yml"
     ]
 }
