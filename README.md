@@ -23,6 +23,8 @@ But the interesting part is that we can use parameters and combine them with the
 
 The library is also completely customizable, from the Loader to the Parser.
 
+*( [Demo](https://web-education.github.io/sijil.js/docs/) )*
+
 ## Installation
 
 ### Using bower 
