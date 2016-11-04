@@ -8,7 +8,7 @@ import { platformBrowserDynamic }   from '@angular/platform-browser-dynamic'
     selector: 'test-i18n',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <h1>{{ 'sijil.demo' | translate }}</h1>
+        <h1>{{ 'sijil.title' | translate }}</h1>
         <div class="selector">
             <div>
                 <label>
@@ -100,7 +100,7 @@ import { platformBrowserDynamic }   from '@angular/platform-browser-dynamic'
     `,
     styles: [`
         :host {
-            line-height: 2em;
+            line-height: 3em;
         }
 
         h1 {
@@ -217,7 +217,7 @@ class RootComponent implements OnInit{
     }
 
     private langPath(lang: string) {
-        return `/demo/${lang}.json`
+        return `../docs/${lang}.json`
     }
     private loadLang(lang: string) {
         return this.bundlesService.loadBundle(this.langPath(lang), lang)

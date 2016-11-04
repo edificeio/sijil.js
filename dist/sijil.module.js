@@ -12,6 +12,7 @@ import { HttpModule } from '@angular/http';
 import { S5lComponent } from './components';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { HttpRequireService, RequireService, BundlesService, SijilOpts, defaultSijilOpts, Parser, FragmentsParser } from './services/index';
+import './rxjs-includes';
 var moduleProviders = [
     { provide: BundlesService, useClass: BundlesService, deps: [RequireService, Parser, SijilOpts] },
     { provide: RequireService, useClass: HttpRequireService },

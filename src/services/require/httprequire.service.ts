@@ -1,7 +1,6 @@
 import { RequireService } from './require.interface'
 import { Injectable } from '@angular/core'
 import { Http } from '@angular/http'
-import 'rxjs/add/operator/toPromise'
 
 /**
  * Fetches a bundle from a target url.

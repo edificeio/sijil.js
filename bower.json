@@ -23,7 +23,7 @@
         "src/",
         "config/",
         ".vscode/",
-        "demo/",
+        "docs/",
         "test/",
         ".babelrc",
         ".DS_Store",

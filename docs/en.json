@@ -1,5 +1,5 @@
 {
-    "sijil.demo" : "[SI]mple [J]son [I]nternationa[L]ization - Demo page",
+    "sijil.title" : "[SI]mple [J]son [I]nternationalization [L]ibrary",
     "hello": "Hello !",
     "choose.language": "Pick a language",
     "loaded.languages": "Loaded languages",

@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
 export var HttpRequireService = (function () {
     function HttpRequireService(http) {
         this.http = http;
