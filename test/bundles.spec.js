@@ -1,6 +1,8 @@
 import { Reflect } from 'core-js'
 import { simpleRequire } from './simple.require'
-import { BundlesService, FragmentsParser, defaultSijilOpts } from '../dist'
+import { defaultSijilOpts } from '../dist/services/sijil.opts'
+import { FragmentsParser } from '../dist/services/parser/fragments.parser'
+import { BundlesService } from '../dist/services/bundles.service'
 
 let assert = require('assert')
 

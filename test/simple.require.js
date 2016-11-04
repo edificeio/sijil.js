@@ -1,4 +1,4 @@
-import { RequireService } from '../dist' 
+import { RequireService } from '../dist/services/require/require.interface' 
 
 import {fr, en} from './mocks'
 
