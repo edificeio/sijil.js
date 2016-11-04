@@ -11,7 +11,10 @@ import { RequireService, SijilOpts, Parser } from './index'
 export class BundlesService {
 
     constructor(private requireService: RequireService, private parser: Parser, sijilOpts: SijilOpts) {
-        this.defaultLanguage = sijilOpts.defaultLanguage || window.navigator.language.split('-')[0]
+        this.defaultLanguage = sijilOpts.defaultLanguage
+        if(!this.defaultLanguage && typeof window !== 'undefined'){
+            this.defaultLanguage = window.navigator.language.split('-')[0]
+        }
         this.currentLanguage = this.defaultLanguage
     }
 
@@ -32,7 +35,7 @@ export class BundlesService {
      * @param {string} [lang] The language to map the bundle with, or the current langugage if omitted. 
      */
     addToBundle(bundle: Object, lang?: string) : void {
-        let targetLanguage = lang || this.currentLanguage
+        let targetLanguage = lang || this.currentLanguage || this.defaultLanguage || 'en'
 
         if(!this.bundles[targetLanguage])
             this.bundles[targetLanguage] = {}
@@ -40,6 +43,9 @@ export class BundlesService {
         for(let key in bundle) {
             this.bundles[targetLanguage][key] = bundle[key]
         }
+
+        if(!this.currentLanguage)
+            this.currentLanguage = lang
     }
 
     /**

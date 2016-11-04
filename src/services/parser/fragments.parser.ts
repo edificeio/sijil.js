@@ -45,10 +45,14 @@ export class FragmentsParser implements Parser {
         return e.fragment
     }
 
-    private getParameter(parameters: Object | any[], fragment: string) : string {
+    private getParameter(parameters: Object | any[], fragment: string, strict?: boolean) : string {
         let splittedFrag = fragment.split(/\s+/)
         if(splittedFrag.length === 1) {
-            return fragment[0] === "$" ? parameters[fragment.substr(1)] : parameters[fragment] || fragment
+            return fragment[0] === "$" ? 
+                parameters[fragment.substr(1)] : 
+                strict ? 
+                    fragment : 
+                    parameters[fragment] || fragment
         }
         return fragment.split(/\s+/).reduce((l, r) => {
             l.push(r[0] === "$" ? parameters[r.substr(1)] : r)
@@ -65,21 +69,26 @@ export class FragmentsParser implements Parser {
             let trueReturn = fragment.substring(interrogationIndex + 1, dotsIndex).trim()
             let falseReturn = fragment.substring(dotsIndex + 1).trim()
             let computedTrueReturn = this.getParameter(parameters, trueReturn)
-            let computedFalseReturn = this.getParameter(parameters,falseReturn)
+            let computedFalseReturn = this.getParameter(parameters, falseReturn)
 
             let splittedCondition = condition.split(/\s+/)
 
             if (splittedCondition.length === 1) {
+                
                 // Single variable case
+
                 let variable = parameters[splittedCondition[0]]
 
                 return variable ?
                     computedTrueReturn :
                     computedFalseReturn
+
             } else if (splittedCondition.length === 3) {
+               
                 // Operator case
-                let leftHandParam = parameters[splittedCondition[0]] || splittedCondition[0]
-                let rightHand = parameters[splittedCondition[2]] || splittedCondition[2]
+
+                let leftHandParam = this.getParameter(parameters, splittedCondition[0], parameters instanceof Array)
+                let rightHand = this.getParameter(parameters, splittedCondition[2], parameters instanceof Array)
                 let comparisonOperator = splittedCondition[1]
 
                 switch (comparisonOperator) {
@@ -106,6 +115,7 @@ export class FragmentsParser implements Parser {
                     default:
                         throw new ParserError(`Invalid conditional operator for fragment : ${fragment}`, fragment)
                 }
+                
             } else {
                 throw new ParserError(`Invalid condition for fragment : ${fragment}`, fragment)
             }

@@ -7,30 +7,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-(function (factory) {
-    if (typeof module === 'object' && typeof module.exports === 'object') {
-        var v = factory(require, exports); if (v !== undefined) module.exports = v;
+import { BundlesService } from '../services';
+import { Pipe } from '@angular/core';
+export var TranslatePipe = (function () {
+    function TranslatePipe(bundlesService) {
+        this.bundlesService = bundlesService;
     }
-    else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports", '../services', '@angular/core'], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    var services_1 = require('../services');
-    var core_1 = require('@angular/core');
-    var TranslatePipe = (function () {
-        function TranslatePipe(bundle) {
-            this.bundle = bundle;
-        }
-        TranslatePipe.prototype.transform = function (key, parameters, lang) {
-            return this.bundle.translate(key, parameters, lang);
-        };
-        TranslatePipe = __decorate([
-            core_1.Pipe({ name: 'translate', pure: false }), 
-            __metadata('design:paramtypes', [services_1.BundlesService])
-        ], TranslatePipe);
-        return TranslatePipe;
-    }());
-    exports.TranslatePipe = TranslatePipe;
-});
+    TranslatePipe.prototype.transform = function (key, parameters, lang) {
+        return this.bundlesService.translate(key, parameters, lang);
+    };
+    TranslatePipe = __decorate([
+        Pipe({ name: 'translate', pure: false }), 
+        __metadata('design:paramtypes', [BundlesService])
+    ], TranslatePipe);
+    return TranslatePipe;
+}());
 //# sourceMappingURL=translate.pipe.js.map

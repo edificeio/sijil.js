@@ -1,20 +1,9 @@
-(function (factory) {
-    if (typeof module === 'object' && typeof module.exports === 'object') {
-        var v = factory(require, exports); if (v !== undefined) module.exports = v;
+export var SijilOpts = (function () {
+    function SijilOpts() {
     }
-    else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    var SijilOpts = (function () {
-        function SijilOpts() {
-        }
-        return SijilOpts;
-    }());
-    exports.SijilOpts = SijilOpts;
-    exports.defaultSijilOpts = {
-        defaultLanguage: window.navigator.language.split('-')[0]
-    };
-});
+    return SijilOpts;
+}());
+export var defaultSijilOpts = {
+    defaultLanguage: typeof window !== 'undefined' ? window.navigator.language.split('-')[0] : undefined
+};
 //# sourceMappingURL=sijil.opts.js.map

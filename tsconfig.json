@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "umd",
+        "module": "es2015",
         "moduleResolution": "node",
         "isolatedModules": false,
         "sourceMap": true,
@@ -19,6 +19,7 @@
     "exclude": [
         "dist",
         "demo",
+        "test",
         "build",
         "config",
         "bundle",

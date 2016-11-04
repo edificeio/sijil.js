@@ -11,5 +11,5 @@ export abstract class SijilOpts {
 }
 
 export let defaultSijilOpts : SijilOpts = {
-    defaultLanguage: window.navigator.language.split('-')[0]
+    defaultLanguage: typeof window !== 'undefined' ? window.navigator.language.split('-')[0] : undefined
 }

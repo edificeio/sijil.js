@@ -24,6 +24,8 @@
         "config/",
         ".vscode/",
         "demo/",
+        "test/",
+        ".babelrc",
         ".DS_Store",
         ".gitignore",
         "tsconfig.json",

@@ -7,49 +7,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-(function (factory) {
-    if (typeof module === 'object' && typeof module.exports === 'object') {
-        var v = factory(require, exports); if (v !== undefined) module.exports = v;
+import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { S5lComponent } from './components';
+import { TranslatePipe } from './pipes/translate.pipe';
+import { HttpRequireService, RequireService, BundlesService, SijilOpts, defaultSijilOpts, Parser, FragmentsParser } from './services/index';
+var moduleProviders = [
+    { provide: BundlesService, useClass: BundlesService, deps: [RequireService, Parser, SijilOpts] },
+    { provide: RequireService, useClass: HttpRequireService },
+    { provide: Parser, useClass: FragmentsParser },
+    { provide: SijilOpts, useValue: defaultSijilOpts }
+];
+export var SijilModule = (function () {
+    function SijilModule() {
     }
-    else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports", '@angular/core', '@angular/http', './components', './pipes/translate.pipe', './services/index'], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    var core_1 = require('@angular/core');
-    var http_1 = require('@angular/http');
-    var components_1 = require('./components');
-    var translate_pipe_1 = require('./pipes/translate.pipe');
-    var index_1 = require('./services/index');
-    var moduleProviders = [
-        { provide: index_1.BundlesService, useClass: index_1.BundlesService, deps: [index_1.RequireService, index_1.Parser, index_1.SijilOpts] },
-        { provide: index_1.RequireService, useClass: index_1.HttpRequireService },
-        { provide: index_1.Parser, useClass: index_1.FragmentsParser },
-        { provide: index_1.SijilOpts, useValue: index_1.defaultSijilOpts }
-    ];
-    var SijilModule = (function () {
-        function SijilModule() {
-        }
-        SijilModule.forRoot = function (require, parser, options) {
-            moduleProviders[1]['useClass'] = require || index_1.HttpRequireService;
-            moduleProviders[2]['useClass'] = parser || index_1.FragmentsParser;
-            moduleProviders[3]['useValue'] = options || index_1.defaultSijilOpts;
-            return {
-                ngModule: SijilModule,
-                providers: moduleProviders
-            };
+    SijilModule.forRoot = function (require, parser, options) {
+        moduleProviders[1]['useClass'] = require || HttpRequireService;
+        moduleProviders[2]['useClass'] = parser || FragmentsParser;
+        moduleProviders[3]['useValue'] = options || defaultSijilOpts;
+        return {
+            ngModule: SijilModule,
+            providers: moduleProviders
         };
-        SijilModule = __decorate([
-            core_1.NgModule({
-                imports: [http_1.HttpModule],
-                declarations: [components_1.S5lComponent, translate_pipe_1.TranslatePipe],
-                providers: moduleProviders,
-                exports: [components_1.S5lComponent, translate_pipe_1.TranslatePipe]
-            }), 
-            __metadata('design:paramtypes', [])
-        ], SijilModule);
-        return SijilModule;
-    }());
-    exports.SijilModule = SijilModule;
-});
+    };
+    SijilModule = __decorate([
+        NgModule({
+            imports: [HttpModule],
+            declarations: [S5lComponent, TranslatePipe],
+            providers: moduleProviders,
+            exports: [S5lComponent, TranslatePipe]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], SijilModule);
+    return SijilModule;
+}());
 //# sourceMappingURL=sijil.module.js.map

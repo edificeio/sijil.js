@@ -209,7 +209,3 @@ Examples:
 `{{ count > 1 ? $count cats : 1 cat }}` + `{"count": 10}` = `10 cats`
 
 `{{ 1 < count ? $count cats : 1 cat }}` + `{"count": 1}` = `1 cat`
-
-## TODO : 
-
- - karma unit tests

@@ -115,10 +115,14 @@ var Parser = (function () {
 var FragmentsParser = (function () {
     function FragmentsParser() {
     }
-    FragmentsParser.prototype.getParameter = function (parameters, fragment) {
+    FragmentsParser.prototype.getParameter = function (parameters, fragment, strict) {
         var splittedFrag = fragment.split(/\s+/);
         if (splittedFrag.length === 1) {
-            return fragment[0] === "$" ? parameters[fragment.substr(1)] : parameters[fragment] || fragment;
+            return fragment[0] === "$" ?
+                parameters[fragment.substr(1)] :
+                strict ?
+                    fragment :
+                    parameters[fragment] || fragment;
         }
         return fragment.split(/\s+/).reduce(function (l, r) {
             l.push(r[0] === "$" ? parameters[r.substr(1)] : r);
@@ -144,8 +148,8 @@ var FragmentsParser = (function () {
             }
             else if (splittedCondition.length === 3) {
                 // Operator case
-                var leftHandParam = parameters[splittedCondition[0]] || splittedCondition[0];
-                var rightHand = parameters[splittedCondition[2]] || splittedCondition[2];
+                var leftHandParam = this.getParameter(parameters, splittedCondition[0], parameters instanceof Array);
+                var rightHand = this.getParameter(parameters, splittedCondition[2], parameters instanceof Array);
                 var comparisonOperator = splittedCondition[1];
                 switch (comparisonOperator) {
                     case '==':
@@ -227,7 +231,10 @@ var BundlesService = (function () {
         this.requireService = requireService;
         this.parser = parser;
         this.bundles = {};
-        this.defaultLanguage = sijilOpts.defaultLanguage || window.navigator.language.split('-')[0];
+        this.defaultLanguage = sijilOpts.defaultLanguage;
+        if (!this.defaultLanguage && typeof window !== 'undefined') {
+            this.defaultLanguage = window.navigator.language.split('-')[0];
+        }
         this.currentLanguage = this.defaultLanguage;
     }
     /**
@@ -237,12 +244,14 @@ var BundlesService = (function () {
      * @param {string} [lang] The language to map the bundle with, or the current langugage if omitted.
      */
     BundlesService.prototype.addToBundle = function (bundle, lang) {
-        var targetLanguage = lang || this.currentLanguage;
+        var targetLanguage = lang || this.currentLanguage || this.defaultLanguage || 'en';
         if (!this.bundles[targetLanguage])
             this.bundles[targetLanguage] = {};
         for (var key in bundle) {
             this.bundles[targetLanguage][key] = bundle[key];
         }
+        if (!this.currentLanguage)
+            this.currentLanguage = lang;
     };
     /**
      * Loads a bundle and associates it with a language.
@@ -271,7 +280,7 @@ var BundlesService = (function () {
         }));
     };
     /**
-     * Removes a bundle.
+     * Removes a bundle from the bundles list.
      *
      * @param {string} lang Language to remove.
      */
@@ -285,7 +294,7 @@ var BundlesService = (function () {
         return Object.keys(this.bundles);
     };
     /**
-     * Translates a single key, using the parameters provided in a target language.
+     * Translates a single key into a target language, using the parameters provided if needed.
      *
      * @param {string} key Key to translate
      * @param {(Object | any[])} [parameters] Parameters to use if the translation contains logic.
@@ -323,7 +332,7 @@ var SijilOpts = (function () {
     return SijilOpts;
 }());
 var defaultSijilOpts = {
-    defaultLanguage: window.navigator.language.split('-')[0]
+    defaultLanguage: typeof window !== 'undefined' ? window.navigator.language.split('-')[0] : undefined
 };
 
 var S5lComponent = (function () {
@@ -368,11 +377,11 @@ var S5lComponent = (function () {
 }());
 
 var TranslatePipe = (function () {
-    function TranslatePipe(bundle) {
-        this.bundle = bundle;
+    function TranslatePipe(bundlesService) {
+        this.bundlesService = bundlesService;
     }
     TranslatePipe.prototype.transform = function (key, parameters, lang) {
-        return this.bundle.translate(key, parameters, lang);
+        return this.bundlesService.translate(key, parameters, lang);
     };
     TranslatePipe = __decorate([
         _angular_core.Pipe({ name: 'translate', pure: false }), 
@@ -429,11 +438,15 @@ var SijilModule = (function () {
     return SijilModule;
 }());
 
-exports.RequireService = RequireService;
-exports.BundlesService = BundlesService;
-exports.Parser = Parser;
-exports.SijilOpts = SijilOpts;
 exports.SijilModule = SijilModule;
+exports.HttpRequireService = HttpRequireService;
+exports.RequireService = RequireService;
+exports.FragmentsParser = FragmentsParser;
+exports.ParserError = ParserError;
+exports.Parser = Parser;
+exports.BundlesService = BundlesService;
+exports.defaultSijilOpts = defaultSijilOpts;
+exports.SijilOpts = SijilOpts;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
