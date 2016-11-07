@@ -102,7 +102,7 @@ describe('Sijil', function() {
         assert.equal(service.translate(`eq.object.check`, params), trueRef)
     })
 
-    it('should compute a fragment containing a complex ternary with [array index]', function(){
+    it('should compute a fragment containing a complex ternary with [array indexes]', function(){
         let params = [1, 1]
 
         let trueRef = "it's true"

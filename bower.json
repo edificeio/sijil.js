@@ -1,5 +1,5 @@
 {
-    "name": "sijil.js",
+    "name": "sijil",
     "description": "A simple and elegant i18n library",
     "moduleType": "es6",
     "main": "dist/index.js",

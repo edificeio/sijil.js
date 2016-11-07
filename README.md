@@ -1,6 +1,8 @@
 # Sijil
 #### *[SI]mple [J]son [I]nternationalization [L]ibrary*
 
+[![Build Status](https://travis-ci.org/web-education/sijil.js.svg)](https://travis-ci.org/web-education/sijil.js)
+
 ## Introduction
 
 Sijil is a simple but powerful i18n library.
@@ -27,24 +29,27 @@ The library is also completely customizable, from the Loader to the Parser.
 
 ## Installation
 
-### Using bower 
+### Using npm
+
+`npm install web-education/sijil.js --save-dev`
+
+### Or bower
+
+>bower cli
+
+`bower install web-education/sijil.js`
 
 >bower.json
 
 ```json
 "dependencies": {
-    "sijil": "git://github.com/web-education/sijil.js#master"
-}
-```
->.bowerrc
-
-```json
-{
-    "directory": "node_modules"
+    "sijil": "web-education/sijil.js#master"
 }
 ```
 
-### Build
+Then : `bower install`
+
+### Or build it yourself
 
 - clone this repo
 - `npm install`
@@ -70,7 +75,7 @@ For example, with SystemJs loader, inside the `systemjs.config.js` file :
      }
      // ... //
  })
-````
+```
 
 #### Import the module
 
@@ -136,12 +141,80 @@ The contents will be added to the current language bundle (or the specified lang
     {{ 'count.key' | translate:{itemNumber: 3} }}
 ```
 
+#### forRoot
+
+```typescript
+static forRoot(require?: Type<RequireService>, parser?: Type<Parser>, options?: SijilOpts): ModuleWithProviders
+```
+
+The forRoot method can be used to override the default services :
+
+```typescript
+class DummyRequire implements RequireService {
+    load(){ return new Promise(res => { res({ 'key': 'value'}) }) }
+}
+
+class DummyParser implements Parser {
+    compile(text){ return text }
+}
+
+let dummyOpts = {  defaultLanguage: 'en' }
+
+@NgModule({
+    imports: [
+        /* ... */
+        SijilModule.forRoot(DummyRequire, DummyParser, dummyOpts)
+        /* ... */
+     ]
+})
+```
+
 ### *Without angular2*
 
 Include via a `<script src="[your.sijil.path]/dist/bundles/sijil.js></script>` tag.
 
 Then use the global `Sijil` object as needed.
 
+```html
+ <script src="../dist/bundles/sijil.js"></script>
+```
+
+```javascript
+// Loads /docs/language.json file.
+Sijil.loadBundle('/docs/' + Sijil.defaultLanguage + '.json').then(function(){
+    // Adds the 'test' key to the bundle.
+    Sijil.addToBundle({ 'test': '[OK] Sijil is now loaded.' })
+    // Logs it.
+    console.log(Sijil.translate('test'))
+})
+```
+
+#### factory :
+
+The factory method can be used to override the default services :
+
+```javascript
+// Declaration in the Sijil lib :
+Sijil['factory'] = (require: RequireService, parser: Parser, opts: SijilOpts) => {
+    return new BundlesService(require || new XHRRequire(), parser || new FragmentsParser(), opts || defaultSijilOpts)
+}
+```
+
+```javascript
+// Usage in your code :
+let sijilInstance = Sijil.factory({
+        // Dummy loader
+        load: () => { return new Promise(res => { res({ 'key': 'value'}) }) },
+    }, {
+        // Dummy parser 
+        compile: (text) => text
+    }, {
+        // Dummy options
+        defaultLanguage: 'en'
+    })
+sijilInstance.loadBundle().then(() => { console.log(sijilInstance.translate('key')) })
+// <-- Outputs 'value'
+```
 
 ## Methods 
 
@@ -191,12 +264,12 @@ The default RequireService provided (HttpRequireService for angular2 users, XhrR
 
 ### Parser Service
 
-A ParserServices computes any logic provided in the translations.
+A ParserService computes any logic provided in the translations.
 
 - Input : 'raw' translation + parameters (Object or Array)
 - Output : 'compiled' translation
 
-The default provider instanciates a FragmentsParserService, which accepts the following syntax.
+The default provider instanciates a FragmentsParserService, which accepts the syntax described below.
 
 #### FragmentsParserService
 
@@ -204,7 +277,9 @@ Logic is contained inside mustache blocks : `{{ logic block }}`
 
 There are two variants :
 
- - A single parameter key (when the params are contained inside an object) or index (params contained inside an array)
+##### A single parameter key or index
+
+*A key when the parameters are contained inside an object or an index when the parameters are contained inside an array*
       
 Examples: 
  
@@ -212,16 +287,26 @@ Examples:
 
 `{{ 1 }}` + `[1, 2]` = `2`
 
-- A ternary-like condition
+##### A ternary-like condition
      
 `{{ condition ? trueValue : falseValue }}`
 
-Where condition may be : a single parameter key/index, or 2 clauses with the following operators : `==, >, =>, <=, <` 
+`{{ leftClause operator rightClause ? trueValue : falseValue }}`
+
+Where condition may be either a single parameter key/index, or 2 clauses with the following operators : `==, >, =>, <=, <` 
 
 Examples: 
  
-(the $ sign to refer to a variable is mandatory when a clause contains more than 1 word)
+*the $ sign is used in ambiguous cases to refer to the parameter*
 
 `{{ count > 1 ? $count cats : 1 cat }}` + `{"count": 10}` = `10 cats`
 
 `{{ 1 < count ? $count cats : 1 cat }}` + `{"count": 1}` = `1 cat`
+
+##### Parameters array or parameter objects ?
+
+The syntax is the same, but with indexes instead of names :
+
+`{{ $0 > 1 ? $0 cats : 1 cat }}` + `[10]` = `10 cats`
+
+`{{ 1 < $0 ? $0 cats : 1 cat named $1 }}` + `[1, 'Albert']` = `1 cat named Albert`
