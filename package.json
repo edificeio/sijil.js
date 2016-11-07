@@ -20,7 +20,7 @@
     "url" : "https://github.com/web-education/sijil.js/issues", 
     "email" : "tech@web-education.net"
   },
-  "license": "GPL-3.0",
+  "license": "AGPL-3.0",
   "private": true,
   "author": "Julien Elbaz <julien.elbaz@opendigitaleducation.com>",
   "files": ["dist/"],
