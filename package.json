@@ -1,6 +1,29 @@
 {
-  "name": "sijil.js",
+  "name": "sijil",
   "version": "0.0.1",
+  "description": "[SI]mple [J]son [I]nternationalization [L]ibrary",
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "angular",
+    "angular2",
+    "sijil",
+    "translate",
+    "traduction"
+  ],
+  "homepage": "https://github.com/web-education/sijil.js",
+  "repository" : { 
+      "type" : "git",
+      "url" : "ttps://github.com/web-education/sijil.js"
+  },
+  "bugs": { 
+    "url" : "https://github.com/web-education/sijil.js/issues", 
+    "email" : "tech@web-education.net"
+  },
+  "license": "GPL-3.0",
+  "private": true,
+  "author": "Julien Elbaz <julien.elbaz@opendigitaleducation.com>",
+  "files": ["dist/"],
   "scripts": {
     "start": "npm run clean && npm run build",
     "build": "rollup -c ./config/rollup.config.js && rollup -c ./config/rollup.config.module.js && tsc",
@@ -9,7 +32,6 @@
     "tsc:w": "tsc -w",
     "clean": "rm -Rf dist"
   },
-  "license": "ISC",
   "peerDependencies": {
     "@angular/common": "~2.1.1",
     "@angular/core": "~2.1.1",

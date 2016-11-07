@@ -15,7 +15,7 @@
         "translate",
         "traduction"
     ],
-    "homepage": "http://entcore.org",
+    "homepage": "https://github.com/web-education/sijil.js",
     "private": true,
     "ignore": [
         "node_modules/",
