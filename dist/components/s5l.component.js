@@ -20,8 +20,9 @@ export var S5lComponent = (function () {
     S5lComponent.prototype.ngAfterViewInit = function () {
         this.value = this.wrapperRef.nativeElement.innerHTML.trim();
         this.loaded = true;
+        this.changeDetectorRef.markForCheck();
     };
-    S5lComponent.prototype.ngDoCheck = function () {
+    S5lComponent.prototype.ngOnChanges = function () {
         if (!this.loaded)
             return;
         this.refreshTranslation();

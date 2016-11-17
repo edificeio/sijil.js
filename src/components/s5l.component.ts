@@ -11,8 +11,8 @@ import { BundlesService } from '../services'
 })
 export class S5lComponent implements AfterViewInit {
 
-    constructor(private bundlesService: BundlesService, 
-        private changeDetectorRef: ChangeDetectorRef){} 
+    constructor(private bundlesService: BundlesService,
+        private changeDetectorRef: ChangeDetectorRef){}
 
     @ViewChild("wrapper") wrapperRef: ElementRef
 
@@ -31,9 +31,10 @@ export class S5lComponent implements AfterViewInit {
     ngAfterViewInit() : void {
         this.value = this.wrapperRef.nativeElement.innerHTML.trim()
         this.loaded = true
+        this.changeDetectorRef.markForCheck()
     }
 
-    ngDoCheck() {
+    ngOnChanges() {
         if(!this.loaded)
             return
         this.refreshTranslation()
