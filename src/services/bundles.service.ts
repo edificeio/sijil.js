@@ -2,7 +2,7 @@ import { RequireService, SijilOpts, Parser } from './index'
 
 /**
  * Defines a BundlesService, whice is the main entry point for Sijil operations.
- * 
+ *
  * A BundlesServices has three dependencies :
  * - RequireService : Used to fetch bundles
  * - Parser : Used to parse logic inside bundle values
@@ -30,9 +30,9 @@ export class BundlesService {
 
     /**
      * Add keys/values to an existing bundle, or create it if missing.
-     * 
+     *
      * @param {Object} bundle An object containing translations as key / values.
-     * @param {string} [lang] The language to map the bundle with, or the current langugage if omitted. 
+     * @param {string} [lang] The language to map the bundle with, or the current langugage if omitted.
      */
     addToBundle(bundle: Object, lang?: string) : void {
         let targetLanguage = lang || this.currentLanguage || this.defaultLanguage || 'en'
@@ -40,9 +40,17 @@ export class BundlesService {
         if(!this.bundles[targetLanguage])
             this.bundles[targetLanguage] = {}
 
+        let newBundle = {}
+        let oldBundle = {}
+
         for(let key in bundle) {
-            this.bundles[targetLanguage][key] = bundle[key]
+            newBundle[key] = bundle[key]
         }
+        for(let key in oldBundle){
+            newBundle[key] = oldBundle[key]
+        }
+
+        this.bundles[targetLanguage] = newBundle
 
         if(!this.currentLanguage)
             this.currentLanguage = lang
@@ -51,7 +59,7 @@ export class BundlesService {
     /**
      * Loads a bundle and associates it with a language.
      * If the target language already contains key/values, then we mixin the new bundle and the existing one.
-     * 
+     *
      * @param {any} where The path, or whatever the RequireService needs to fetch the bundle.
      * @param {string} [lang] The target language, or the current language if omitted.
      * @returns {Promise<void>} A Promise, because the RequireService can be (is - by default) asynchronous.
@@ -64,7 +72,7 @@ export class BundlesService {
     }
     /**
      * Loads multiple bundles and associates then with a language.
-     * 
+     *
      * @see {@link loadBundle}
      */
     loadBundles(specs: { lang: string, where: any }[]): Promise<void[]> {
@@ -75,7 +83,7 @@ export class BundlesService {
 
     /**
      * Removes a bundle from the bundles list.
-     * 
+     *
      * @param {string} lang Language to remove.
      */
     unloadBundle(lang: string) : void {
@@ -91,7 +99,7 @@ export class BundlesService {
 
     /**
      * Translates a single key into a target language, using the parameters provided if needed.
-     * 
+     *
      * @param {string} key Key to translate
      * @param {(Object | any[])} [parameters] Parameters to use if the translation contains logic.
      * @param {string} [lang] Target language, of the current language if omitted.
@@ -99,11 +107,11 @@ export class BundlesService {
      */
     translate(key: string, parameters?: Object | any[], lang?: string) : string {
         let targetLanguage = lang || this.currentLanguage
-        
+
         let rawTranslation : string = this.bundles[targetLanguage] &&
             this.bundles[targetLanguage][key] ||
             this.defaultLanguage &&
-            this.bundles[this.defaultLanguage] && 
+            this.bundles[this.defaultLanguage] &&
             this.bundles[this.defaultLanguage][key] ||
             key
 

@@ -24,6 +24,8 @@ export class S5lComponent implements AfterViewInit {
     @Input("s5l-lang")
     private fixedLanguage: string
 
+    private bundleRef = null
+
     private refreshTranslation() {
         this.wrapperRef.nativeElement.innerHTML = this.bundlesService.translate(this.value, this.parameters, this.fixedLanguage)
     }
@@ -31,12 +33,15 @@ export class S5lComponent implements AfterViewInit {
     ngAfterViewInit() : void {
         this.value = this.wrapperRef.nativeElement.innerHTML.trim()
         this.loaded = true
-        this.changeDetectorRef.markForCheck()
+        this.bundleRef = this.bundlesService['bundles'][this.fixedLanguage || this.bundlesService.currentLanguage]
+        this.refreshTranslation()
     }
 
-    ngOnChanges() {
-        if(!this.loaded)
+    ngDoCheck() {
+        let newBundleRef = this.bundlesService['bundles'][this.fixedLanguage || this.bundlesService.currentLanguage]
+        if(!this.loaded || this.bundleRef === newBundleRef)
             return
+        this.bundleRef = newBundleRef
         this.refreshTranslation()
     }
 }

@@ -20,14 +20,14 @@ import { platformBrowserDynamic }   from '@angular/platform-browser-dynamic'
                     <option value="it">{{ 'unsupported.language' | translate }}</option>
                 </select>
             </div>
-            
+
             <div>
                 <label>
                     <s5l>use.default.lang</s5l>
                 </label>
                 <input type="checkbox" [(ngModel)]="defaultLanguage"/>
             </div>
-           
+
             <div class="language-inspector">
                 <label><s5l>loaded.languages</s5l></label>
                 <span *ngFor="let language of bundlesService.getLoadedLanguages()">
@@ -48,7 +48,8 @@ import { platformBrowserDynamic }   from '@angular/platform-browser-dynamic'
                         <tbody>
                             <tr *ngFor="let key of getKeys(inspectedLanguage)">
                                 <td>{{key}}</td>
-                                <td><input [(ngModel)]="bundlesService.bundles[inspectedLanguage][key]" type="text"/></td>
+                                <td><input [(ngModel)]="bundlesService.bundles[inspectedLanguage][key]" type="text"
+                                    (change)="reloadBundle(inspectedLanguage)"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -61,7 +62,7 @@ import { platformBrowserDynamic }   from '@angular/platform-browser-dynamic'
                 <s5l>hello</s5l>
             </div>
             <div class="demo-item">
-                <label>{{ 'attributes' | translate }}</label> 
+                <label>{{ 'attributes' | translate }}</label>
                 <input attr.placeholder="{{ 'hello' | translate }}" type="text"/>
             </div>
             <div class="demo-item">
@@ -188,12 +189,19 @@ class RootComponent implements OnInit{
         private ref: ChangeDetectorRef,
         private bundlesService: BundlesService){}
 
+    ngOnInit() {
+        this.bundlesService.defaultLanguage = 'en'
+        this.loadLang('en').then(() => {
+            return this.loadLang(this.language)
+        })
+    }
+
     private _language: string = window.navigator.language
     set language(lang: string) {
         this._language = lang
         this.bundlesService.currentLanguage = lang
         if(this.bundlesService.getLoadedLanguages().indexOf(lang) < 0)
-            this.loadLang(lang)        
+            this.loadLang(lang)
     }
     get language() {
         return this._language
@@ -229,13 +237,13 @@ class RootComponent implements OnInit{
             })
     }
 
-    private conditionalParams = { 
-        name : 'Alice', 
-        male: false, 
+    private conditionalParams = {
+        name : 'Alice',
+        male: false,
         bunnyCount: 1
     }
     private positionalParams = [ 'Robert', 'Diane', 'Francis' ]
-    private shuffleArray = (a: any[]) => { 
+    private shuffleArray = (a: any[]) => {
         for (let i = a.length; i; i--) {
             let j = Math.floor(Math.random() * i);
             [a[i - 1], a[j]] = [a[j], a[i - 1]];
@@ -246,12 +254,11 @@ class RootComponent implements OnInit{
         return Object.keys(this.bundlesService['bundles'][lang])
     }
 
-    ngOnInit() {
-        this.bundlesService.defaultLanguage = 'en'
-        this.loadLang('en').then(() => {
-            return this.loadLang(this.language)
-        })
+    reloadBundle(inspectedLanguage) {
+        this.bundlesService.addToBundle(this.bundlesService['bundles'][inspectedLanguage], inspectedLanguage)
     }
+
+
 }
 
 @NgModule({

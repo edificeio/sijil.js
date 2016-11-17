@@ -13,6 +13,7 @@ export var S5lComponent = (function () {
     function S5lComponent(bundlesService, changeDetectorRef) {
         this.bundlesService = bundlesService;
         this.changeDetectorRef = changeDetectorRef;
+        this.bundleRef = null;
     }
     S5lComponent.prototype.refreshTranslation = function () {
         this.wrapperRef.nativeElement.innerHTML = this.bundlesService.translate(this.value, this.parameters, this.fixedLanguage);
@@ -20,11 +21,14 @@ export var S5lComponent = (function () {
     S5lComponent.prototype.ngAfterViewInit = function () {
         this.value = this.wrapperRef.nativeElement.innerHTML.trim();
         this.loaded = true;
-        this.changeDetectorRef.markForCheck();
+        this.bundleRef = this.bundlesService['bundles'][this.fixedLanguage || this.bundlesService.currentLanguage];
+        this.refreshTranslation();
     };
-    S5lComponent.prototype.ngOnChanges = function () {
-        if (!this.loaded)
+    S5lComponent.prototype.ngDoCheck = function () {
+        var newBundleRef = this.bundlesService['bundles'][this.fixedLanguage || this.bundlesService.currentLanguage];
+        if (!this.loaded || this.bundleRef === newBundleRef)
             return;
+        this.bundleRef = newBundleRef;
         this.refreshTranslation();
     };
     __decorate([

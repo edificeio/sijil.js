@@ -13,9 +13,15 @@ export var BundlesService = (function () {
         var targetLanguage = lang || this.currentLanguage || this.defaultLanguage || 'en';
         if (!this.bundles[targetLanguage])
             this.bundles[targetLanguage] = {};
+        var newBundle = {};
+        var oldBundle = {};
         for (var key in bundle) {
-            this.bundles[targetLanguage][key] = bundle[key];
+            newBundle[key] = bundle[key];
         }
+        for (var key in oldBundle) {
+            newBundle[key] = oldBundle[key];
+        }
+        this.bundles[targetLanguage] = newBundle;
         if (!this.currentLanguage)
             this.currentLanguage = lang;
     };

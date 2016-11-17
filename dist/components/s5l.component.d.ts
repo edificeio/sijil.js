@@ -9,7 +9,8 @@ export declare class S5lComponent implements AfterViewInit {
     private loaded;
     private parameters;
     private fixedLanguage;
+    private bundleRef;
     private refreshTranslation();
     ngAfterViewInit(): void;
-    ngOnChanges(): void;
+    ngDoCheck(): void;
 }
