@@ -11,8 +11,7 @@ import { BundlesService } from '../services'
 })
 export class S5lComponent implements AfterViewInit {
 
-    constructor(private bundlesService: BundlesService,
-        private changeDetectorRef: ChangeDetectorRef){}
+    constructor(private bundlesService: BundlesService){}
 
     @ViewChild("wrapper") wrapperRef: ElementRef
 
@@ -24,8 +23,6 @@ export class S5lComponent implements AfterViewInit {
     @Input("s5l-lang")
     private fixedLanguage: string
 
-    private bundleRef = null
-
     private refreshTranslation() {
         this.wrapperRef.nativeElement.innerHTML = this.bundlesService.translate(this.value, this.parameters, this.fixedLanguage)
     }
@@ -33,15 +30,12 @@ export class S5lComponent implements AfterViewInit {
     ngAfterViewInit() : void {
         this.value = this.wrapperRef.nativeElement.innerHTML.trim()
         this.loaded = true
-        this.bundleRef = this.bundlesService['bundles'][this.fixedLanguage || this.bundlesService.currentLanguage]
         this.refreshTranslation()
     }
 
     ngDoCheck() {
-        let newBundleRef = this.bundlesService['bundles'][this.fixedLanguage || this.bundlesService.currentLanguage]
-        if(!this.loaded || this.bundleRef === newBundleRef)
+        if (!this.loaded)
             return
-        this.bundleRef = newBundleRef
         this.refreshTranslation()
     }
 }

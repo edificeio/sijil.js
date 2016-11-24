@@ -186,7 +186,7 @@ import { platformBrowserDynamic }   from '@angular/platform-browser-dynamic'
 })
 class RootComponent implements OnInit{
     constructor(
-        private ref: ChangeDetectorRef,
+        private cdRef: ChangeDetectorRef,
         private bundlesService: BundlesService){}
 
     ngOnInit() {
@@ -210,7 +210,7 @@ class RootComponent implements OnInit{
     private _inspectedLanguage : string
     set inspectedLanguage(lang: string) {
         this._inspectedLanguage = lang
-        this.ref.markForCheck()
+        this.cdRef.markForCheck()
     }
     get inspectedLanguage() { return this._inspectedLanguage }
 
@@ -218,7 +218,7 @@ class RootComponent implements OnInit{
     set defaultLanguage(check: boolean) {
         this._useDefaultLanguage = check
         this.bundlesService.defaultLanguage = check ? 'en' : null
-        this.ref.markForCheck()
+        this.cdRef.markForCheck()
     }
     get defaultLanguage() {
         return this._useDefaultLanguage
@@ -230,7 +230,7 @@ class RootComponent implements OnInit{
     private loadLang(lang: string) {
         return this.bundlesService.loadBundle(this.langPath(lang), lang)
             .then(() => {
-                this.ref.markForCheck()
+                this.cdRef.markForCheck()
             })
             .catch(() => {
                 console.log(this.bundlesService.translate("unsupported.language"))

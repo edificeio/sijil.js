@@ -7,13 +7,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { BundlesService } from '../services';
 export var S5lComponent = (function () {
-    function S5lComponent(bundlesService, changeDetectorRef) {
+    function S5lComponent(bundlesService) {
         this.bundlesService = bundlesService;
-        this.changeDetectorRef = changeDetectorRef;
-        this.bundleRef = null;
     }
     S5lComponent.prototype.refreshTranslation = function () {
         this.wrapperRef.nativeElement.innerHTML = this.bundlesService.translate(this.value, this.parameters, this.fixedLanguage);
@@ -21,14 +19,11 @@ export var S5lComponent = (function () {
     S5lComponent.prototype.ngAfterViewInit = function () {
         this.value = this.wrapperRef.nativeElement.innerHTML.trim();
         this.loaded = true;
-        this.bundleRef = this.bundlesService['bundles'][this.fixedLanguage || this.bundlesService.currentLanguage];
         this.refreshTranslation();
     };
     S5lComponent.prototype.ngDoCheck = function () {
-        var newBundleRef = this.bundlesService['bundles'][this.fixedLanguage || this.bundlesService.currentLanguage];
-        if (!this.loaded || this.bundleRef === newBundleRef)
+        if (!this.loaded)
             return;
-        this.bundleRef = newBundleRef;
         this.refreshTranslation();
     };
     __decorate([
@@ -49,7 +44,7 @@ export var S5lComponent = (function () {
             template: "\n    <span #wrapper>\n        <ng-content></ng-content>\n    </span>",
             changeDetection: ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [BundlesService, ChangeDetectorRef])
+        __metadata('design:paramtypes', [BundlesService])
     ], S5lComponent);
     return S5lComponent;
 }());
