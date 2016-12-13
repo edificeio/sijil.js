@@ -23,7 +23,7 @@
   "license": "AGPL-3.0",
   "private": true,
   "author": "Julien Elbaz <julien.elbaz@opendigitaleducation.com>",
-  "files": ["dist/"],
+  "files": ["dist/", "index.js"],
   "scripts": {
     "start": "npm run clean && npm run build",
     "build": "rollup -c ./config/rollup.config.js && rollup -c ./config/rollup.config.module.js && tsc",

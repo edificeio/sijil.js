@@ -8,7 +8,7 @@
 Sijil is a simple but powerful i18n library.
 It can be used in conjunction with angular2, or as an old fashioned &lt;script&gt; inclusion.
 
-Sijil is (very) basically a javascript object with one entry by language loaded, 
+Sijil is (very) basically a javascript object with one entry by language loaded,
 which contains all the translations available as key/values.
 
 Like this :
@@ -53,7 +53,7 @@ Then : `bower install`
 
 - clone this repo
 - `npm install`
-- `npm start` 
+- `npm start`
 
 Distribution files will be located inside the `dist` folder.
 
@@ -61,7 +61,7 @@ Distribution files will be located inside the `dist` folder.
 
 ### *With angular2*
 
-Use the es6 files ( `dist/index.js` as the entry point ) and d.ts definitions, or the umd.bundle located inside the `dist/bundles/sijil.module.umd.js`. 
+Use the es6 files ( `dist/index.js` as the entry point ) and d.ts definitions, or the umd.bundle located inside the `dist/bundles/sijil.module.umd.js`.
 
 For example, with SystemJs loader, inside the `systemjs.config.js` file :
 
@@ -70,7 +70,7 @@ For example, with SystemJs loader, inside the `systemjs.config.js` file :
      // ... //
      map: {
          // ... //
-         'sijil/dist': 'npm:sijil/dist/bundles/sijil.module.umd.js'
+         'sijil': 'npm:sijil/dist/bundles/sijil.module.umd.js'
          // ... //
      }
      // ... //
@@ -80,7 +80,7 @@ For example, with SystemJs loader, inside the `systemjs.config.js` file :
 #### Import the module
 
 ```typescript
-import { SijilModule } from 'sijil/dist'
+import { SijilModule } from 'sijil'
 
 @NgModule({
     imports: [
@@ -91,7 +91,7 @@ import { SijilModule } from 'sijil/dist'
 })
 ```
 
-*Alternative* : 
+*Alternative* :
 
 A `forRoot` method is provided to allow customization.
 
@@ -100,14 +100,14 @@ A `forRoot` method is provided to allow customization.
 - Inject the main service :
 
 ```typescript
-import { BundlesService } from 'sijil/dist'
+import { BundlesService } from 'sijil'
 
 /* ... */
 
 constructor(..., private bundlesService: BundlesService, ...){}
 ```
 
-- Load a bundle : 
+- Load a bundle :
 
 ```typescript
 this.bundlesService.loadBundle('/path/to/the/language/file.json', 'en')
@@ -206,7 +206,7 @@ let sijilInstance = Sijil.factory({
         // Dummy loader
         load: () => { return new Promise(res => { res({ 'key': 'value'}) }) },
     }, {
-        // Dummy parser 
+        // Dummy parser
         compile: (text) => text
     }, {
         // Dummy options
@@ -216,7 +216,7 @@ sijilInstance.loadBundle().then(() => { console.log(sijilInstance.translate('key
 // <-- Outputs 'value'
 ```
 
-## Methods 
+## Methods
 
 #### loadBundle
 *or loadBundles for multiple bundles*
@@ -257,10 +257,10 @@ getLoadedLanguages() : string[]
 
 ### Require Service
 
-A RequireService is used to fetch bundles. It contains a single `load: (from: any) => Promise<Object>` method, 
+A RequireService is used to fetch bundles. It contains a single `load: (from: any) => Promise<Object>` method,
 which loads the bundle according to its argument value.
 
-The default RequireService provided (HttpRequireService for angular2 users, XhrRequireService otherwise) fetches the bundles from an url and parses json from the reponse. 
+The default RequireService provided (HttpRequireService for angular2 users, XhrRequireService otherwise) fetches the bundles from an url and parses json from the reponse.
 
 ### Parser Service
 
@@ -280,23 +280,23 @@ There are two variants :
 ##### A single parameter key or index
 
 *A key when the parameters are contained inside an object or an index when the parameters are contained inside an array*
-      
-Examples: 
- 
-`{{ key }}` + `{ "key" : "my key" }` = `my key` 
+
+Examples:
+
+`{{ key }}` + `{ "key" : "my key" }` = `my key`
 
 `{{ 1 }}` + `[1, 2]` = `2`
 
 ##### A ternary-like condition
-     
+
 `{{ condition ? trueValue : falseValue }}`
 
 `{{ leftClause operator rightClause ? trueValue : falseValue }}`
 
-Where condition may be either a single parameter key/index, or 2 clauses with the following operators : `==, >, =>, <=, <` 
+Where condition may be either a single parameter key/index, or 2 clauses with the following operators : `==, >, =>, <=, <`
 
-Examples: 
- 
+Examples:
+
 *the $ sign is used in ambiguous cases to refer to the parameter*
 
 `{{ count > 1 ? $count cats : 1 cat }}` + `{"count": 10}` = `10 cats`
