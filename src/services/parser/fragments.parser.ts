@@ -2,33 +2,33 @@ import { Parser, ParserCallback, ParserError } from './parser.interface'
 
 /**
  * The default Sijil parser.
- * 
+ *
  * - Input : bundle value (translation) + parameters (Object or Array)
  * - Output : compiled translation
- * 
+ *
  * Logic is contained inside mustache blocks : {{ LOGIC BLOCK }}
- * 
+ *
  * There are two variants :
  *  - A single parameter key (when the params are contained inside an object) or index (params contained inside an array)
- *      
- * Examples: 
- * 
- * {{ key }} + { "key" : "my key" } = my key 
- * 
+ *
+ * Examples:
+ *
+ * {{ key }} + { "key" : "my key" } = my key
+ *
  * {{ 1 }} + [1, 2] = 2
- * 
+ *
  *  - A ternary-like condition
- *      
+ *
  * {{ condition ? trueValue : falseValue }}
- * Where condition may be : a single parameter key/index, or 2 clauses with the following operators : ==, >, =>, <=, < 
- * 
- * Examples: 
- * 
+ * Where condition may be : a single parameter key/index, or 2 clauses with the following operators : ==, >, =>, <=, <
+ *
+ * Examples:
+ *
  * (the $ sign to refer to a variable is mandatory when a clause contains more than 1 word)
- * 
+ *
  * {{ count > 1 ? $count cats : 1 cat }} + {"count": 10} = 10 cats
  * {{ 1 < count ? $count cats : 1 cat }} + {"count": 1} = 1 cat
- * 
+ *
  * @export
  * @class FragmentsParser
  * @implements {Parser}
@@ -48,11 +48,13 @@ export class FragmentsParser implements Parser {
     private getParameter(parameters: Object | any[], fragment: string, strict?: boolean) : string {
         let splittedFrag = fragment.split(/\s+/)
         if(splittedFrag.length === 1) {
-            return fragment[0] === "$" ? 
-                parameters[fragment.substr(1)] : 
-                strict ? 
-                    fragment : 
-                    parameters[fragment] || fragment
+            return fragment[0] === "$" ?
+                parameters[fragment.substr(1)] :
+                strict ?
+                    fragment :
+                    parameters[fragment] !== undefined ?
+                        parameters[fragment] :
+                        fragment
         }
         return fragment.split(/\s+/).reduce((l, r) => {
             l.push(r[0] === "$" ? parameters[r.substr(1)] : r)
@@ -74,7 +76,7 @@ export class FragmentsParser implements Parser {
             let splittedCondition = condition.split(/\s+/)
 
             if (splittedCondition.length === 1) {
-                
+
                 // Single variable case
 
                 let variable = parameters[splittedCondition[0]]
@@ -84,7 +86,7 @@ export class FragmentsParser implements Parser {
                     computedFalseReturn
 
             } else if (splittedCondition.length === 3) {
-               
+
                 // Operator case
 
                 let leftHandParam = this.getParameter(parameters, splittedCondition[0], parameters instanceof Array)
@@ -115,7 +117,7 @@ export class FragmentsParser implements Parser {
                     default:
                         throw new ParserError(`Invalid conditional operator for fragment : ${fragment}`, fragment)
                 }
-                
+
             } else {
                 throw new ParserError(`Invalid condition for fragment : ${fragment}`, fragment)
             }
