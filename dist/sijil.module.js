@@ -19,7 +19,7 @@ var moduleProviders = [
     { provide: Parser, useClass: FragmentsParser },
     { provide: SijilOpts, useValue: defaultSijilOpts }
 ];
-export var SijilModule = (function () {
+var SijilModule = SijilModule_1 = (function () {
     function SijilModule() {
     }
     SijilModule.forRoot = function (require, parser, options) {
@@ -27,19 +27,21 @@ export var SijilModule = (function () {
         moduleProviders[2]['useClass'] = parser || FragmentsParser;
         moduleProviders[3]['useValue'] = options || defaultSijilOpts;
         return {
-            ngModule: SijilModule,
+            ngModule: SijilModule_1,
             providers: moduleProviders
         };
     };
-    SijilModule = __decorate([
-        NgModule({
-            imports: [HttpModule],
-            declarations: [S5lComponent, TranslatePipe],
-            providers: moduleProviders,
-            exports: [S5lComponent, TranslatePipe]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], SijilModule);
     return SijilModule;
 }());
+SijilModule = SijilModule_1 = __decorate([
+    NgModule({
+        imports: [HttpModule],
+        declarations: [S5lComponent, TranslatePipe],
+        providers: moduleProviders,
+        exports: [S5lComponent, TranslatePipe]
+    }),
+    __metadata("design:paramtypes", [])
+], SijilModule);
+export { SijilModule };
+var SijilModule_1;
 //# sourceMappingURL=sijil.module.js.map

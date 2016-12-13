@@ -1,4 +1,4 @@
-export var BundlesService = (function () {
+var BundlesService = (function () {
     function BundlesService(requireService, parser, sijilOpts) {
         this.requireService = requireService;
         this.parser = parser;
@@ -61,4 +61,5 @@ export var BundlesService = (function () {
     };
     return BundlesService;
 }());
+export { BundlesService };
 //# sourceMappingURL=bundles.service.js.map

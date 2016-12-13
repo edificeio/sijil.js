@@ -9,17 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { BundlesService } from '../services';
 import { Pipe } from '@angular/core';
-export var TranslatePipe = (function () {
+var TranslatePipe = (function () {
     function TranslatePipe(bundlesService) {
         this.bundlesService = bundlesService;
     }
     TranslatePipe.prototype.transform = function (key, parameters, lang) {
         return this.bundlesService.translate(key, parameters, lang);
     };
-    TranslatePipe = __decorate([
-        Pipe({ name: 'translate', pure: false }), 
-        __metadata('design:paramtypes', [BundlesService])
-    ], TranslatePipe);
     return TranslatePipe;
 }());
+TranslatePipe = __decorate([
+    Pipe({ name: 'translate', pure: false }),
+    __metadata("design:paramtypes", [BundlesService])
+], TranslatePipe);
+export { TranslatePipe };
 //# sourceMappingURL=translate.pipe.js.map

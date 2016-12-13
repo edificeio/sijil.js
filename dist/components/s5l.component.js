@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { BundlesService } from '../services';
-export var S5lComponent = (function () {
+var S5lComponent = (function () {
     function S5lComponent(bundlesService) {
         this.bundlesService = bundlesService;
     }
@@ -26,26 +26,27 @@ export var S5lComponent = (function () {
             return;
         this.refreshTranslation();
     };
-    __decorate([
-        ViewChild("wrapper"), 
-        __metadata('design:type', ElementRef)
-    ], S5lComponent.prototype, "wrapperRef", void 0);
-    __decorate([
-        Input("s5l-params"), 
-        __metadata('design:type', Object)
-    ], S5lComponent.prototype, "parameters", void 0);
-    __decorate([
-        Input("s5l-lang"), 
-        __metadata('design:type', String)
-    ], S5lComponent.prototype, "fixedLanguage", void 0);
-    S5lComponent = __decorate([
-        Component({
-            selector: 's5l',
-            template: "\n    <span #wrapper>\n        <ng-content></ng-content>\n    </span>",
-            changeDetection: ChangeDetectionStrategy.OnPush
-        }), 
-        __metadata('design:paramtypes', [BundlesService])
-    ], S5lComponent);
     return S5lComponent;
 }());
+__decorate([
+    ViewChild("wrapper"),
+    __metadata("design:type", ElementRef)
+], S5lComponent.prototype, "wrapperRef", void 0);
+__decorate([
+    Input("s5l-params"),
+    __metadata("design:type", Object)
+], S5lComponent.prototype, "parameters", void 0);
+__decorate([
+    Input("s5l-lang"),
+    __metadata("design:type", String)
+], S5lComponent.prototype, "fixedLanguage", void 0);
+S5lComponent = __decorate([
+    Component({
+        selector: 's5l',
+        template: "\n    <span #wrapper>\n        <ng-content></ng-content>\n    </span>",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    }),
+    __metadata("design:paramtypes", [BundlesService])
+], S5lComponent);
+export { S5lComponent };
 //# sourceMappingURL=s5l.component.js.map

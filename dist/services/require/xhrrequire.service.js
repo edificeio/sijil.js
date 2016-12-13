@@ -1,4 +1,4 @@
-export var XHRRequire = (function () {
+var XHRRequire = (function () {
     function XHRRequire() {
     }
     XHRRequire.prototype.load = function (from, async) {
@@ -23,4 +23,5 @@ export var XHRRequire = (function () {
     };
     return XHRRequire;
 }());
+export { XHRRequire };
 //# sourceMappingURL=xhrrequire.service.js.map

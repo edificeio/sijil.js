@@ -3,18 +3,21 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-export var ParserError = (function (_super) {
+var ParserError = (function (_super) {
     __extends(ParserError, _super);
     function ParserError(message, fragment) {
-        _super.call(this, message);
-        this.message = message;
-        this.fragment = fragment;
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.fragment = fragment;
+        return _this;
     }
     return ParserError;
 }(Error));
-export var Parser = (function () {
+export { ParserError };
+var Parser = (function () {
     function Parser() {
     }
     return Parser;
 }());
+export { Parser };
 //# sourceMappingURL=parser.interface.js.map

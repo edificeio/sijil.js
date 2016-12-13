@@ -1,4 +1,3 @@
-/// <reference types="core-js" />
 import { BundlesService } from '../services';
 export declare class TranslatePipe {
     private bundlesService;

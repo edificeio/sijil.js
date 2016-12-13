@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export declare class ParserError extends Error {
     message: string;
     fragment: string;

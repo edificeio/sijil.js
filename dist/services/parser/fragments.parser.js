@@ -1,5 +1,5 @@
 import { ParserError } from './parser.interface';
-export var FragmentsParser = (function () {
+var FragmentsParser = (function () {
     function FragmentsParser() {
     }
     FragmentsParser.prototype.getParameter = function (parameters, fragment, strict) {
@@ -9,7 +9,9 @@ export var FragmentsParser = (function () {
                 parameters[fragment.substr(1)] :
                 strict ?
                     fragment :
-                    parameters[fragment] || fragment;
+                    parameters[fragment] !== undefined ?
+                        parameters[fragment] :
+                        fragment;
         }
         return fragment.split(/\s+/).reduce(function (l, r) {
             l.push(r[0] === "$" ? parameters[r.substr(1)] : r);
@@ -94,12 +96,13 @@ export var FragmentsParser = (function () {
         }
         return compiledTranslation;
     };
-    FragmentsParser.delimiters = ['{{', '}}'];
-    FragmentsParser.delimRegexp = new RegExp(FragmentsParser.delimiters[0] + "[^}]+" + FragmentsParser.delimiters[1], 'gm');
-    FragmentsParser.defaultErrorCallback = function (e) {
-        console.error(e);
-        return e.fragment;
-    };
     return FragmentsParser;
 }());
+export { FragmentsParser };
+FragmentsParser.delimiters = ['{{', '}}'];
+FragmentsParser.delimRegexp = new RegExp(FragmentsParser.delimiters[0] + "[^}]+" + FragmentsParser.delimiters[1], 'gm');
+FragmentsParser.defaultErrorCallback = function (e) {
+    console.error(e);
+    return e.fragment;
+};
 //# sourceMappingURL=fragments.parser.js.map

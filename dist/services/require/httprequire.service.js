@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-export var HttpRequireService = (function () {
+var HttpRequireService = (function () {
     function HttpRequireService(http) {
         this.http = http;
     }
@@ -17,10 +17,11 @@ export var HttpRequireService = (function () {
         return this.http.get(url).toPromise()
             .then(function (data) { return data.json(); });
     };
-    HttpRequireService = __decorate([
-        Injectable(), 
-        __metadata('design:paramtypes', [Http])
-    ], HttpRequireService);
     return HttpRequireService;
 }());
+HttpRequireService = __decorate([
+    Injectable(),
+    __metadata("design:paramtypes", [Http])
+], HttpRequireService);
+export { HttpRequireService };
 //# sourceMappingURL=httprequire.service.js.map

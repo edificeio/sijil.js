@@ -12,12 +12,12 @@
     "traduction"
   ],
   "homepage": "https://github.com/web-education/sijil.js",
-  "repository" : { 
+  "repository" : {
       "type" : "git",
       "url" : "ttps://github.com/web-education/sijil.js"
   },
-  "bugs": { 
-    "url" : "https://github.com/web-education/sijil.js/issues", 
+  "bugs": {
+    "url" : "https://github.com/web-education/sijil.js/issues",
     "email" : "tech@web-education.net"
   },
   "license": "AGPL-3.0",
@@ -33,18 +33,18 @@
     "clean": "rm -Rf dist"
   },
   "peerDependencies": {
-    "@angular/common": "~2.1.1",
-    "@angular/core": "~2.1.1",
-    "@angular/http": "~2.1.1"
+    "@angular/common": "~2.3.0",
+    "@angular/core": "~2.3.0",
+    "@angular/http": "~2.3.0"
   },
   "devDependencies": {
-    "@angular/common": "~2.1.1",
-    "@angular/compiler": "~2.1.1",
-    "@angular/core": "~2.1.1",
-    "@angular/forms": "~2.1.1",
-    "@angular/http": "~2.1.1",
-    "@angular/platform-browser": "~2.1.1",
-    "@angular/platform-browser-dynamic": "~2.1.1",
+    "@angular/common": "~2.3.0",
+    "@angular/compiler": "~2.3.0",
+    "@angular/core": "~2.3.0",
+    "@angular/forms": "~2.3.0",
+    "@angular/http": "~2.3.0",
+    "@angular/platform-browser": "~2.3.0",
+    "@angular/platform-browser-dynamic": "~2.3.0",
     "@types/core-js": "^0.9.34",
     "@types/mocha": "^2.2.32",
     "@types/node": "^6.0.45",
@@ -56,9 +56,9 @@
     "reflect-metadata": "^0.1.8",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-uglify": "^1.0.1",
-    "rxjs": "5.0.0-beta.12",
+    "rxjs": "5.0.0-rc.4",
     "systemjs": "^0.19.40",
-    "typescript": "^2.0.3",
-    "zone.js": "^0.6.25"
+    "typescript": "^2.1.1",
+    "zone.js": "^0.7.2"
   }
 }

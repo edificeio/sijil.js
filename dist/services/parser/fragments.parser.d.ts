@@ -1,4 +1,3 @@
-/// <reference types="core-js" />
 import { Parser, ParserCallback } from './parser.interface';
 export declare class FragmentsParser implements Parser {
     constructor();
