@@ -61,7 +61,7 @@ Distribution files will be located inside the `dist` folder.
 
 ### *With angular2*
 
-Use the es6 files ( `dist/index.js` as the entry point ) and d.ts definitions, or the umd.bundle located inside the `dist/bundles/sijil.module.umd.js`.
+Use the es6 files (`index.js` as the entry point) and d.ts definitions, or the umd.bundle (`dist/bundles/sijil.module.umd.js`).
 
 For example, with SystemJs loader, inside the `systemjs.config.js` file :
 
@@ -85,15 +85,13 @@ import { SijilModule } from 'sijil'
 @NgModule({
     imports: [
         /* ... */
-        SijilModule
+        SijilModule.forRoot(), // In the root module
+        // OR
+        SijilModule.forChild() // For lazily loaded modules
         /* ... */
      ]
 })
 ```
-
-*Alternative* :
-
-A `forRoot` method is provided to allow customization.
 
 #### Inside a component
 
@@ -104,7 +102,7 @@ import { BundlesService } from 'sijil'
 
 /* ... */
 
-constructor(..., private bundlesService: BundlesService, ...){}
+constructor(/*...*/, private bundlesService: BundlesService, /*...*/){}
 ```
 
 - Load a bundle :
@@ -193,8 +191,8 @@ Sijil.loadBundle('/docs/' + Sijil.defaultLanguage + '.json').then(function(){
 
 The factory method can be used to override the default services :
 
-```javascript
-// Declaration in the Sijil lib :
+```typescript
+// Internal definition of the factory function :
 Sijil['factory'] = (require: RequireService, parser: Parser, opts: SijilOpts) => {
     return new BundlesService(require || new XHRRequire(), parser || new FragmentsParser(), opts || defaultSijilOpts)
 }

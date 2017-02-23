@@ -1,6 +1,6 @@
 /**
  * Contains Sijil options.
- * 
+ *
  * @export
  * @abstract
  * @class SijilOpts
@@ -11,5 +11,5 @@ export abstract class SijilOpts {
 }
 
 export let defaultSijilOpts : SijilOpts = {
-    defaultLanguage: typeof window !== 'undefined' ? window.navigator.language.split('-')[0] : undefined
+    defaultLanguage: window ? window.navigator.language.split('-')[0] : undefined
 }

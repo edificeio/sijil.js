@@ -17,6 +17,7 @@
         "outDir": "./dist"
     },
     "exclude": [
+        "aot",
         "dist",
         "docs",
         "test",
@@ -30,5 +31,9 @@
     "buildOnSave": false,
     "atom": {
         "rewriteTsconfig": false
+    },
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "debug": true
     }
 }

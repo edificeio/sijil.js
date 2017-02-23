@@ -262,7 +262,7 @@ class RootComponent implements OnInit{
 }
 
 @NgModule({
-    imports: [ BrowserModule, FormsModule, SijilModule ],
+    imports: [ BrowserModule, FormsModule, SijilModule.forRoot() ],
     declarations: [ RootComponent ],
     bootstrap: [ RootComponent ]
 })

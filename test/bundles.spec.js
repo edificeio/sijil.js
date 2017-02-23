@@ -1,6 +1,5 @@
 import { Reflect } from 'core-js'
 import { simpleRequire } from './simple.require'
-import { defaultSijilOpts } from '../dist/services/sijil.opts'
 import { FragmentsParser } from '../dist/services/parser/fragments.parser'
 import { BundlesService } from '../dist/services/bundles.service'
 
@@ -11,7 +10,7 @@ describe('Sijil', function() {
     let service
 
     before(function(){
-        service = new BundlesService(simpleRequire, new FragmentsParser(), defaultSijilOpts)
+        service = new BundlesService(simpleRequire, new FragmentsParser(), {})
         service.defaultLanguage = 'en'
         return service.loadBundles([{lang: 'fr', where: 'fr'}, { lang: 'en', where: 'en' }])
             .then(service.currentLanguage = 'en')

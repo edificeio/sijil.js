@@ -18,10 +18,8 @@ export class S5lComponent implements AfterViewInit {
     private value: string
     private loaded: boolean
 
-    @Input("s5l-params")
-    private parameters: Object | any[]
-    @Input("s5l-lang")
-    private fixedLanguage: string
+    @Input("s5l-params") parameters: Object | any[]
+    @Input("s5l-lang") fixedLanguage: string
 
     private refreshTranslation() {
         this.wrapperRef.nativeElement.innerHTML = this.bundlesService.translate(this.value, this.parameters, this.fixedLanguage)
