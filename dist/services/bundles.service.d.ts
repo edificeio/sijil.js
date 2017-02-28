@@ -1,4 +1,3 @@
-/// <reference types="core-js" />
 import { RequireService, SijilOpts, Parser } from './index';
 export declare class BundlesService {
     private requireService;

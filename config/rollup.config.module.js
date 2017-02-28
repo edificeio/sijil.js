@@ -13,8 +13,10 @@ export default {
         '@angular/http': 'ng.http',
         'rxjs/add/operator/toPromise': 'Rx'
     },
+    external: ['@angular/core', '@angular/common', '@angular/http', 'rxjs/add/operator/toPromise'],
     plugins: [
         typescript({
+            typescript: require('typescript'),
             tsconfig: false,
             emitDecoratorMetadata: true,
             experimentalDecorators: true,

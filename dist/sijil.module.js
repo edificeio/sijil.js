@@ -1,21 +1,15 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { S5lComponent } from './components';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { HttpRequireService, RequireService, BundlesService, SijilOpts, defaultSijilOpts, Parser, FragmentsParser } from './services/index';
 import './rxjs-includes';
-var SijilModule = SijilModule_1 = (function () {
+var SijilModule = (function () {
     function SijilModule() {
     }
     SijilModule.forRoot = function (require, parser, options) {
         return {
-            ngModule: SijilModule_1,
+            ngModule: SijilModule,
             providers: [
                 { provide: BundlesService, useClass: BundlesService, deps: [RequireService, Parser, SijilOpts] },
                 { provide: RequireService, useClass: require || HttpRequireService },
@@ -26,20 +20,20 @@ var SijilModule = SijilModule_1 = (function () {
     };
     SijilModule.forChild = function () {
         return {
-            ngModule: SijilModule_1,
+            ngModule: SijilModule,
             providers: []
         };
     };
     return SijilModule;
 }());
-SijilModule = SijilModule_1 = __decorate([
-    NgModule({
-        imports: [HttpModule],
-        declarations: [S5lComponent, TranslatePipe],
-        providers: [],
-        exports: [S5lComponent, TranslatePipe]
-    })
-], SijilModule);
 export { SijilModule };
-var SijilModule_1;
+SijilModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [HttpModule],
+                declarations: [S5lComponent, TranslatePipe],
+                providers: [],
+                exports: [S5lComponent, TranslatePipe]
+            },] },
+];
+SijilModule.ctorParameters = function () { return []; };
 //# sourceMappingURL=sijil.module.js.map

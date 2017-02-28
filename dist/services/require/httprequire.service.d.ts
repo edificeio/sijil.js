@@ -1,4 +1,3 @@
-/// <reference types="core-js" />
 import { RequireService } from './require.interface';
 import { Http } from '@angular/http';
 export declare class HttpRequireService implements RequireService {
