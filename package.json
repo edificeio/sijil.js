@@ -25,7 +25,8 @@
   "author": "Julien Elbaz <julien.elbaz@opendigitaleducation.com>",
   "files": [
     "dist/",
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "scripts": {
     "start": "npm run clean && npm run build",

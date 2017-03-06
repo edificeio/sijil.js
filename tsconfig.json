@@ -25,7 +25,8 @@
         "config",
         "bundle",
         "node_modules",
-        "bower_components"
+        "bower_components",
+        "index.d.ts"
     ],
     "compileOnSave": false,
     "buildOnSave": false,
