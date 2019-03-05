@@ -17,12 +17,17 @@ export class S5lComponent implements AfterViewInit {
 
     private value: string
     private loaded: boolean
+    private displayedValue: string
 
     @Input("s5l-params") parameters: Object | any[]
     @Input("s5l-lang") fixedLanguage: string
 
     private refreshTranslation() {
-        this.wrapperRef.nativeElement.innerHTML = this.bundlesService.translate(this.value, this.parameters, this.fixedLanguage)
+        const newDisplayedValue = this.bundlesService.translate(this.value, this.parameters, this.fixedLanguage)
+        if (this.displayedValue !== newDisplayedValue) {
+            this.displayedValue = newDisplayedValue
+            this.wrapperRef.nativeElement.innerHTML = this.displayedValue
+        }
     }
 
     ngAfterViewInit() : void {
