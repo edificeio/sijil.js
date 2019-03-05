@@ -25,25 +25,25 @@ But the interesting part is that we can use parameters and combine them with the
 
 The library is also completely customizable, from the Loader to the Parser.
 
-*( [Demo](https://web-education.github.io/sijil.js/docs/) )*
+*( [Demo](https://opendigitaleducation.github.io/sijil.js/docs/) )*
 
 ## Installation
 
 ### Using npm
 
-`npm install web-education/sijil.js --save-dev`
+`npm install opendigitaleducation/sijil.js --save-dev`
 
 ### Or bower
 
 >bower cli
 
-`bower install web-education/sijil.js`
+`bower install opendigitaleducation/sijil.js`
 
 >bower.json
 
 ```json
 "dependencies": {
-    "sijil": "web-education/sijil.js#master"
+    "sijil": "opendigitaleducation/sijil.js#master"
 }
 ```
 
