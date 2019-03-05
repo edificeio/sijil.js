@@ -5,7 +5,11 @@ var S5lComponent = (function () {
         this.bundlesService = bundlesService;
     }
     S5lComponent.prototype.refreshTranslation = function () {
-        this.wrapperRef.nativeElement.innerHTML = this.bundlesService.translate(this.value, this.parameters, this.fixedLanguage);
+        var newDisplayedValue = this.bundlesService.translate(this.value, this.parameters, this.fixedLanguage);
+        if (this.displayedValue !== newDisplayedValue) {
+            this.displayedValue = newDisplayedValue;
+            this.wrapperRef.nativeElement.innerHTML = this.displayedValue;
+        }
     };
     S5lComponent.prototype.ngAfterViewInit = function () {
         this.value = this.wrapperRef.nativeElement.innerHTML.trim();

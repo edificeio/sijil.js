@@ -6,6 +6,7 @@ export declare class S5lComponent implements AfterViewInit {
     wrapperRef: ElementRef;
     private value;
     private loaded;
+    private displayedValue;
     parameters: Object | any[];
     fixedLanguage: string;
     private refreshTranslation();
