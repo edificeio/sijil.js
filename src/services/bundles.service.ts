@@ -40,17 +40,7 @@ export class BundlesService {
         if(!this.bundles[targetLanguage])
             this.bundles[targetLanguage] = {}
 
-        let newBundle = {}
-        let oldBundle = {}
-
-        for(let key in bundle) {
-            newBundle[key] = bundle[key]
-        }
-        for(let key in oldBundle){
-            newBundle[key] = oldBundle[key]
-        }
-
-        this.bundles[targetLanguage] = newBundle
+        this.bundles[targetLanguage] = Object.assign({}, this.bundles[targetLanguage], bundle);
 
         if(!this.currentLanguage)
             this.currentLanguage = lang
