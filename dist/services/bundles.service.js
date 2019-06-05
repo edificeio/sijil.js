@@ -13,15 +13,7 @@ var BundlesService = (function () {
         var targetLanguage = lang || this.currentLanguage || this.defaultLanguage || 'en';
         if (!this.bundles[targetLanguage])
             this.bundles[targetLanguage] = {};
-        var newBundle = {};
-        var oldBundle = {};
-        for (var key in bundle) {
-            newBundle[key] = bundle[key];
-        }
-        for (var key in oldBundle) {
-            newBundle[key] = oldBundle[key];
-        }
-        this.bundles[targetLanguage] = newBundle;
+        this.bundles[targetLanguage] = Object.assign({}, this.bundles[targetLanguage], bundle);
         if (!this.currentLanguage)
             this.currentLanguage = lang;
     };

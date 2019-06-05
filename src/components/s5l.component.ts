@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core'
+import { Component, Input, ElementRef, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core'
 import { BundlesService } from '../services'
 
 @Component({
