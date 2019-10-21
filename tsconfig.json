@@ -35,6 +35,7 @@
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
-        "debug": true
+        "debug": true,
+        "preserveWhitespaces": "off"
     }
 }

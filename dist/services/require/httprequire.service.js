@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 var HttpRequireService = (function () {
-    function HttpRequireService(http) {
-        this.http = http;
+    function HttpRequireService(httpClient) {
+        this.httpClient = httpClient;
     }
     HttpRequireService.prototype.load = function (url) {
-        return this.http.get(url).toPromise()
-            .then(function (data) { return data.json(); });
+        return this.httpClient.get(url).toPromise()
+            .then(function (data) { return data; });
     };
+    HttpRequireService.decorators = [
+        { type: Injectable },
+    ];
+    HttpRequireService.ctorParameters = function () { return [
+        { type: HttpClient, },
+    ]; };
     return HttpRequireService;
 }());
 export { HttpRequireService };
-HttpRequireService.decorators = [
-    { type: Injectable },
-];
-HttpRequireService.ctorParameters = function () { return [
-    { type: Http, },
-]; };
 //# sourceMappingURL=httprequire.service.js.map

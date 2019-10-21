@@ -1,6 +1,6 @@
 import { RequireService } from './require.interface'
 import { Injectable } from '@angular/core'
-import { Http } from '@angular/http'
+import { HttpClient } from '@angular/common/http'
 
 /**
  * Fetches a bundle from a target url.
@@ -12,11 +12,11 @@ import { Http } from '@angular/http'
 @Injectable()
 export class HttpRequireService implements RequireService {
 
-    constructor(private http: Http){}
+    constructor(private httpClient: HttpClient){}
 
     load(url) : Promise<Object> {
-        return this.http.get(url).toPromise()
-            .then(data => data.json())
+        return this.httpClient.get(url).toPromise()
+            .then(data => data);
     }
 
 }

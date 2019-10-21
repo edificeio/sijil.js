@@ -10,10 +10,10 @@ export default {
     globals: {
         '@angular/core': 'ng.core',
         '@angular/common': 'ng.common',
-        '@angular/http': 'ng.http',
+        '@angular/common/http': 'ng.common.http',
         'rxjs/add/operator/toPromise': 'Rx'
     },
-    external: ['@angular/core', '@angular/common', '@angular/http', 'rxjs/add/operator/toPromise'],
+    external: ['@angular/core', '@angular/common', '@angular/common/http', 'rxjs/add/operator/toPromise'],
     plugins: [
         typescript({
             typescript: require('typescript'),

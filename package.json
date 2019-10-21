@@ -1,6 +1,6 @@
 {
   "name": "sijil",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "[SI]mple [J]son [I]nternationalization [L]ibrary",
   "keywords": [
     "i18n",
@@ -37,19 +37,17 @@
     "clean": "rimraf dist && rimraf aot"
   },
   "peerDependencies": {
-    "@angular/common": "4.1.0",
-    "@angular/core": "4.1.0",
-    "@angular/http": "4.1.0"
+    "@angular/common": "5.2.0",
+    "@angular/core": "5.2.0"
   },
   "devDependencies": {
-    "@angular/common": "4.1.0",
-    "@angular/compiler": "4.1.0",
-    "@angular/compiler-cli": "4.1.0",
-    "@angular/core": "4.1.0",
-    "@angular/forms": "4.1.0",
-    "@angular/http": "4.1.0",
-    "@angular/platform-browser": "4.1.0",
-    "@angular/platform-browser-dynamic": "4.1.0",
+    "@angular/common": "5.2.0",
+    "@angular/compiler": "5.2.0",
+    "@angular/compiler-cli": "5.2.0",
+    "@angular/core": "5.2.0",
+    "@angular/forms": "5.2.0",
+    "@angular/platform-browser": "5.2.0",
+    "@angular/platform-browser-dynamic": "5.2.0",
     "@types/core-js": "0.9.36",
     "@types/mocha": "^2.2.32",
     "@types/node": "6.0.73",
@@ -63,9 +61,9 @@
     "rollup": "^0.41.6",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-uglify": "^1.0.1",
-    "rxjs": "5.4.0",
+    "rxjs": "5.5.2",
     "systemjs": "^0.19.40",
-    "typescript": "2.2.1",
+    "typescript": "2.4.2",
     "zone.js": "0.8.10"
   }
 }

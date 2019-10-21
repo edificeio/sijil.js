@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { BundlesService } from '../services';
 var S5lComponent = (function () {
     function S5lComponent(bundlesService) {
@@ -21,22 +21,22 @@ var S5lComponent = (function () {
             return;
         this.refreshTranslation();
     };
+    S5lComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 's5l',
+                    template: "\n    <span #wrapper>\n        <ng-content></ng-content>\n    </span>",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    S5lComponent.ctorParameters = function () { return [
+        { type: BundlesService, },
+    ]; };
+    S5lComponent.propDecorators = {
+        "wrapperRef": [{ type: ViewChild, args: ["wrapper",] },],
+        "parameters": [{ type: Input, args: ["s5l-params",] },],
+        "fixedLanguage": [{ type: Input, args: ["s5l-lang",] },],
+    };
     return S5lComponent;
 }());
 export { S5lComponent };
-S5lComponent.decorators = [
-    { type: Component, args: [{
-                selector: 's5l',
-                template: "\n    <span #wrapper>\n        <ng-content></ng-content>\n    </span>",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] },
-];
-S5lComponent.ctorParameters = function () { return [
-    { type: BundlesService, },
-]; };
-S5lComponent.propDecorators = {
-    'wrapperRef': [{ type: ViewChild, args: ["wrapper",] },],
-    'parameters': [{ type: Input, args: ["s5l-params",] },],
-    'fixedLanguage': [{ type: Input, args: ["s5l-lang",] },],
-};
 //# sourceMappingURL=s5l.component.js.map

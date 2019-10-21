@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders, Type } from '@angular/core'
-import { HttpModule } from '@angular/http'
+import { HttpClientModule } from '@angular/common/http'
 
 import { S5lComponent } from './components'
 import { TranslatePipe } from './pipes/translate.pipe'
@@ -25,7 +25,7 @@ import './rxjs-includes'
  * ```
  */
 @NgModule({
-    imports: [ HttpModule ],
+    imports: [ HttpClientModule ],
     declarations: [ S5lComponent, TranslatePipe ],
     providers: [],
     exports: [ S5lComponent, TranslatePipe ]

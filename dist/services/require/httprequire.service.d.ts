@@ -1,7 +1,7 @@
 import { RequireService } from './require.interface';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 export declare class HttpRequireService implements RequireService {
-    private http;
-    constructor(http: Http);
+    private httpClient;
+    constructor(httpClient: HttpClient);
     load(url: any): Promise<Object>;
 }

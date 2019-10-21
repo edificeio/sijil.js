@@ -96,13 +96,13 @@ var FragmentsParser = (function () {
         }
         return compiledTranslation;
     };
+    FragmentsParser.delimiters = ['{{', '}}'];
+    FragmentsParser.delimRegexp = new RegExp(FragmentsParser.delimiters[0] + "[^}]+" + FragmentsParser.delimiters[1], 'gm');
+    FragmentsParser.defaultErrorCallback = function (e) {
+        console.error(e);
+        return e.fragment;
+    };
     return FragmentsParser;
 }());
 export { FragmentsParser };
-FragmentsParser.delimiters = ['{{', '}}'];
-FragmentsParser.delimRegexp = new RegExp(FragmentsParser.delimiters[0] + "[^}]+" + FragmentsParser.delimiters[1], 'gm');
-FragmentsParser.defaultErrorCallback = function (e) {
-    console.error(e);
-    return e.fragment;
-};
 //# sourceMappingURL=fragments.parser.js.map
