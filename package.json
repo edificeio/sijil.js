@@ -38,13 +38,13 @@
   },
   "peerDependencies": {
     "@angular/common": "5.2.0",
-    "@angular/core": "5.2.0"
+    "@angular/core": "10.2.5"
   },
   "devDependencies": {
     "@angular/common": "5.2.0",
     "@angular/compiler": "5.2.0",
     "@angular/compiler-cli": "5.2.0",
-    "@angular/core": "5.2.0",
+    "@angular/core": "10.2.5",
     "@angular/forms": "5.2.0",
     "@angular/platform-browser": "5.2.0",
     "@angular/platform-browser-dynamic": "5.2.0",
